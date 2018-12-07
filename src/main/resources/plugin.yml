@@ -1,6 +1,7 @@
 name: TouchscreenHolograms
 main: com.gmail.filoghost.touchscreen.TouchscreenHolograms
 version: ${project.version}
+api-version: 1.13
 
 softdepend: [HolographicDisplays]
 
