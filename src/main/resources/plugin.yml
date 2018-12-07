@@ -1,0 +1,11 @@
+name: TouchscreenHolograms
+main: com.gmail.filoghost.touchscreen.TouchscreenHolograms
+version: ${project.version}
+
+softdepend: [HolographicDisplays]
+
+commands:
+  touch:
+    description: TouchscreenHolograms main command.
+    usage: /<command> (Startup error)
+    aliases: [touchholograms, touchhologram, th]
