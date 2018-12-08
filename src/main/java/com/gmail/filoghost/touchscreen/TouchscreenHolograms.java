@@ -24,21 +24,56 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.filoghost.holographicdisplays.object.NamedHologramManager;
-import com.gmail.filoghost.holographicdisplays.util.ConsoleLogger;
 import com.gmail.filoghost.touchscreen.command.RootCommandHandler;
+import com.gmail.filoghost.touchscreen.disk.Settings;
 import com.gmail.filoghost.touchscreen.disk.TouchHologramStorage;
 import com.gmail.filoghost.touchscreen.listener.EventListener;
 import com.gmail.filoghost.touchscreen.touch.TouchHologram;
+import com.gmail.filoghost.touchscreen.utils.ConsoleLogger;
+import com.gmail.filoghost.updater.ResponseHandler;
+import com.gmail.filoghost.updater.UpdateChecker;
 
 public class TouchscreenHolograms extends JavaPlugin {
 	
 	private static TouchscreenHolograms instance;
+	private static Settings settings;
 	private static TouchHologramStorage fileStorage;
 	private static TouchManager touchManager;
+	private static String newVersion;
 	
 	@Override
 	public void onEnable() {
 		instance = this;
+		
+		// Load the settings
+		settings = new Settings(new File(getDataFolder(), "config.yml"));
+		try {
+			settings.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			printErrorAndDisable(
+				"******************************************************",
+				"     Could not load config.yml.",
+				"     " + getDescription().getName() + " will be disabled.",
+				"******************************************************"
+			);
+			return;
+		}
+		
+		// Check for updates
+		if (settings.updateNotification) {
+			UpdateChecker.run(this, 77049, new ResponseHandler() {
+				
+				@Override
+				public void onUpdateFound(final String newVersion) {
+					TouchscreenHolograms.newVersion = newVersion;
+					ConsoleLogger.log(Level.INFO, "Found a new version available: " + newVersion);
+					ConsoleLogger.log(Level.INFO, "Download it on Bukkit Dev:");
+					ConsoleLogger.log(Level.INFO, "https://dev.bukkit.org/projects/touchscreen-holograms");
+				}
+				
+			});
+		}
 		
 		// Check that Holographic Displays is present and enabled
 		Plugin holographicDisplaysPlugin = Bukkit.getPluginManager().getPlugin("HolographicDisplays");
@@ -137,12 +172,20 @@ public class TouchscreenHolograms extends JavaPlugin {
 		return instance;
 	}
 	
+	public static Settings getSettings() {
+		return settings;
+	}
+	
 	public static TouchHologramStorage getFileStorage() {
 		return fileStorage;
 	}
 	
 	public static TouchManager getTouchManager() {
 		return touchManager;
+	}
+	
+	public static String getNewVersion() {
+		return newVersion;
 	}
 	
 }

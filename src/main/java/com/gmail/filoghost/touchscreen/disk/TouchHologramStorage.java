@@ -15,34 +15,16 @@
 package com.gmail.filoghost.touchscreen.disk;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
 import com.gmail.filoghost.touchscreen.touch.TouchCommand;
 import com.gmail.filoghost.touchscreen.touch.TouchHologram;
-import com.gmail.filoghost.touchscreen.utils.ConsoleLogger;
 
-public class TouchHologramStorage {
-
-	private File file;
-	private FileConfiguration config;
+public class TouchHologramStorage extends ConfigBase {
 	
 	public TouchHologramStorage(File file) {
-		this.file = file;
-	}
-	
-	public void load() throws IOException {
-		if (!file.exists()) {
-			file.createNewFile();
-		}
-		config = YamlConfiguration.loadConfiguration(file);
+		super(file);
 	}
 	
 	public TouchHologram loadTouchHologram(String name) {
@@ -80,27 +62,6 @@ public class TouchHologramStorage {
 	
 	public boolean isExistingTouchHologram(String name) {
 		return config.isConfigurationSection(name);
-	}
-	
-	public void saveToDisk() throws IOException {
-		if (file != null && config != null) {
-			config.save(file);
-		}
-	}
-	
-	public boolean trySaveToDisk() {
-		return trySaveToDisk(null);
-	}
-	
-	public boolean trySaveToDisk(CommandSender sender) {
-		try {
-			saveToDisk();
-			return true;
-		} catch (IOException ex) {
-			ConsoleLogger.log(Level.SEVERE, "Unable to save " + file.getName() + " to disk!", ex);
-			sender.sendMessage("I/O error: could not save " + file.getName() + " to disk.");
-			return false;
-		}
 	}
 	
 }

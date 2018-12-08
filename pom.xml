@@ -47,6 +47,12 @@
 			<version>2.3.0</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.gmail.filoghost.updater</groupId>
+			<artifactId>updater</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.bstats</groupId>
@@ -89,6 +95,10 @@
 						<relocation>
 							<pattern>org.bstats</pattern>
 							<shadedPattern>com.gmail.filoghost.touchscreen.metrics</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>com.gmail.filoghost.updater</pattern>
+							<shadedPattern>com.gmail.filoghost.touchscreen.updater</shadedPattern>
 						</relocation>
 					</relocations>
 				</configuration>

@@ -14,16 +14,27 @@
  */
 package com.gmail.filoghost.touchscreen.listener;
 
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import com.gmail.filoghost.holographicdisplays.event.HolographicDisplaysReloadEvent;
 import com.gmail.filoghost.holographicdisplays.event.NamedHologramEditedEvent;
+import com.gmail.filoghost.touchscreen.Perms;
 import com.gmail.filoghost.touchscreen.TouchscreenHolograms;
 import com.gmail.filoghost.touchscreen.touch.TouchHologram;
-import com.gmail.filoghost.holographicdisplays.event.HolographicDisplaysReloadEvent;
 
 public class EventListener implements Listener {
+	
+	@EventHandler
+	public void onJoin(PlayerJoinEvent event) {
+		if (TouchscreenHolograms.getNewVersion() != null && event.getPlayer().hasPermission(Perms.MAIN_PERMISSION) && TouchscreenHolograms.getSettings().updateNotification) {
+			event.getPlayer().sendMessage(ChatColor.DARK_GREEN + "[Touchscreen Holograms] " + ChatColor.GREEN + "Found an update: " + TouchscreenHolograms.getNewVersion() + ". Download:");
+			event.getPlayer().sendMessage(ChatColor.DARK_GREEN + ">> " + ChatColor.GREEN + "https://dev.bukkit.org/projects/touchscreen-holograms");
+		}
+	}
 
 	@EventHandler
 	public void onLeave(PlayerQuitEvent event) {
