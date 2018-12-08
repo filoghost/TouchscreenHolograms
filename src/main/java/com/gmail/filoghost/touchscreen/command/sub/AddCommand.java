@@ -70,7 +70,6 @@ public class AddCommand extends SubCommand {
 					String text = ChatColor.stripColor(((TextLine) hologram.getLine(0)).getText());
 					
 					if (text.length() > 6) {
-						System.out.println(text);
 						Format.sendWarning(sender, "You selected a hologram with the first line longer than 6 chars. Since the holograms rotate (client side), you should reduce the length, because the click wouldn't be detected correctly.");
 					}
 				}
