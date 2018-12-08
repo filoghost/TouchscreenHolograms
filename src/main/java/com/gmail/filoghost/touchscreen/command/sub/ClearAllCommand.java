@@ -18,13 +18,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import com.gmail.filoghost.touchscreen.Perms;
-import com.gmail.filoghost.touchscreen.TouchManager;
 import com.gmail.filoghost.touchscreen.TouchscreenHolograms;
 import com.gmail.filoghost.touchscreen.command.CommandException;
 import com.gmail.filoghost.touchscreen.command.CommandValidator;
 import com.gmail.filoghost.touchscreen.command.SubCommand;
 import com.gmail.filoghost.touchscreen.disk.TouchHologramStorage;
 import com.gmail.filoghost.touchscreen.touch.TouchHologram;
+import com.gmail.filoghost.touchscreen.touch.TouchManager;
 
 public class ClearAllCommand extends SubCommand {
 

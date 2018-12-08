@@ -29,6 +29,7 @@ import com.gmail.filoghost.touchscreen.disk.Settings;
 import com.gmail.filoghost.touchscreen.disk.TouchHologramStorage;
 import com.gmail.filoghost.touchscreen.listener.EventListener;
 import com.gmail.filoghost.touchscreen.touch.TouchHologram;
+import com.gmail.filoghost.touchscreen.touch.TouchManager;
 import com.gmail.filoghost.touchscreen.utils.ConsoleLogger;
 import com.gmail.filoghost.updater.ResponseHandler;
 import com.gmail.filoghost.updater.UpdateChecker;

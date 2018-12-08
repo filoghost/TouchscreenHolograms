@@ -22,7 +22,6 @@ import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
 import com.gmail.filoghost.holographicdisplays.object.NamedHologram;
 import com.gmail.filoghost.holographicdisplays.object.NamedHologramManager;
 import com.gmail.filoghost.touchscreen.Perms;
-import com.gmail.filoghost.touchscreen.TouchManager;
 import com.gmail.filoghost.touchscreen.TouchscreenHolograms;
 import com.gmail.filoghost.touchscreen.command.CommandException;
 import com.gmail.filoghost.touchscreen.command.CommandValidator;
@@ -30,6 +29,7 @@ import com.gmail.filoghost.touchscreen.command.SubCommand;
 import com.gmail.filoghost.touchscreen.disk.TouchHologramStorage;
 import com.gmail.filoghost.touchscreen.touch.TouchCommand;
 import com.gmail.filoghost.touchscreen.touch.TouchHologram;
+import com.gmail.filoghost.touchscreen.touch.TouchManager;
 import com.gmail.filoghost.touchscreen.utils.Format;
 
 public class AddCommand extends SubCommand {
