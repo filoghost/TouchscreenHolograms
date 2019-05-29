@@ -56,7 +56,7 @@ public class HelpCommand extends SubCommand {
 			sender.sendMessage("");
 			sender.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "Touchscreen Holograms commands");
 			for (SubCommand subCommand : commandHandler.getSubCommands()) {
-				if (subCommand instanceof HelpCommand) {
+				if (!(subCommand instanceof HelpCommand)) {
 					String usage = "/touch " + subCommand.getName() + (subCommand.getUsage().length() > 0 ? " " + subCommand.getUsage() : "");
 					sender.sendMessage(ChatColor.GREEN + usage);
 				}
