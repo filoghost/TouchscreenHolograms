@@ -34,7 +34,10 @@ public class ConfigBase {
 	}
 	
 	public void load() throws IOException {
-		if (!file.exists()) {
+		if (!file.getParentFile().isDirectory()) {
+			file.getParentFile().mkdirs();
+		}
+		if (!file.isFile()) {
 			file.createNewFile();
 		}
 		config = YamlConfiguration.loadConfiguration(file);
