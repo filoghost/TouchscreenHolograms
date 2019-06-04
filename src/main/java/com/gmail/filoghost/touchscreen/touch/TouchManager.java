@@ -26,7 +26,7 @@ import com.gmail.filoghost.holographicdisplays.object.line.CraftHologramLine;
 
 public class TouchManager {
 
-	private Map<String, TouchHologram> touchHologramsByName = new LinkedHashMap<String, TouchHologram>();
+	private Map<String, TouchHologram> touchHologramsByName = new LinkedHashMap<>();
 	
 	public void add(TouchHologram touchHologram) {
 		touchHologramsByName.put(touchHologram.getLinkedHologramName().toLowerCase(), touchHologram);
@@ -41,7 +41,7 @@ public class TouchManager {
 	}
 	
 	public List<TouchHologram> getTouchHolograms() {
-		return new ArrayList<TouchHologram>(touchHologramsByName.values());
+		return new ArrayList<>(touchHologramsByName.values());
 	}
 	
 	

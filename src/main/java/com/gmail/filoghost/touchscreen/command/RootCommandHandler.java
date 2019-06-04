@@ -37,7 +37,7 @@ public class RootCommandHandler implements CommandExecutor {
 	private List<SubCommand> subCommands;
 	
 	public RootCommandHandler() {
-		subCommands = new ArrayList<SubCommand>();
+		subCommands = new ArrayList<>();
 		
 		addSubCommand(new ClearAllCommand());
 		addSubCommand(new ListCommand());

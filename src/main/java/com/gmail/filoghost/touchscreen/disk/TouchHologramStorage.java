@@ -29,7 +29,7 @@ public class TouchHologramStorage extends ConfigBase {
 	
 	public TouchHologram loadTouchHologram(String name) {
 		List<String> commandsStrings = config.getStringList(name + ".commands");
-		List<TouchCommand> commands = new ArrayList<TouchCommand>();
+		List<TouchCommand> commands = new ArrayList<>();
 		
 		for (String commandString : commandsStrings) {
 			commands.add(TouchCommand.fromCommandString(commandString));
@@ -47,7 +47,7 @@ public class TouchHologramStorage extends ConfigBase {
 	}
 	
 	public void saveTouchHologram(TouchHologram hologram) {
-		List<String> tempList = new ArrayList<String>();
+		List<String> tempList = new ArrayList<>();
 		
 		for (TouchCommand command : hologram.getCommands()) {
 			tempList.add(command.toCommandString());

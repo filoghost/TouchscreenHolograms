@@ -31,8 +31,8 @@ import com.gmail.filoghost.touchscreen.listener.EventListener;
 import com.gmail.filoghost.touchscreen.touch.TouchHologram;
 import com.gmail.filoghost.touchscreen.touch.TouchManager;
 import com.gmail.filoghost.touchscreen.utils.ConsoleLogger;
-import com.gmail.filoghost.updater.ResponseHandler;
-import com.gmail.filoghost.updater.UpdateChecker;
+
+import me.filoghost.updatechecker.UpdateChecker;
 
 public class TouchscreenHolograms extends JavaPlugin {
 	
@@ -63,16 +63,11 @@ public class TouchscreenHolograms extends JavaPlugin {
 		
 		// Check for updates
 		if (settings.updateNotification) {
-			UpdateChecker.run(this, 77049, new ResponseHandler() {
-				
-				@Override
-				public void onUpdateFound(final String newVersion) {
-					TouchscreenHolograms.newVersion = newVersion;
-					ConsoleLogger.log(Level.INFO, "Found a new version available: " + newVersion);
-					ConsoleLogger.log(Level.INFO, "Download it on Bukkit Dev:");
-					ConsoleLogger.log(Level.INFO, "https://dev.bukkit.org/projects/touchscreen-holograms");
-				}
-				
+			UpdateChecker.run(this, 77049, (String newVersion) -> {
+				TouchscreenHolograms.newVersion = newVersion;
+				ConsoleLogger.log(Level.INFO, "Found a new version available: " + newVersion);
+				ConsoleLogger.log(Level.INFO, "Download it on Bukkit Dev:");
+				ConsoleLogger.log(Level.INFO, "https://dev.bukkit.org/projects/touchscreen-holograms");
 			});
 		}
 		
@@ -126,29 +121,26 @@ public class TouchscreenHolograms extends JavaPlugin {
 		new MetricsLite(this);		
 		
 		// The entities are loaded when the server is ready
-		Bukkit.getScheduler().runTaskLater(this, new Runnable() {
+		Bukkit.getScheduler().runTaskLater(this, () -> {
+
+			// Check that holograms still exist in Holographic Displays
+			boolean fileStorageUpdated = false;
 			
-			@Override
-			public void run() {
-				// Check that holograms still exist in Holographic Displays
-				boolean fileStorageUpdated = false;
-				
-				for (TouchHologram touchHologram : touchManager.getTouchHolograms()) {
-					String name = touchHologram.getLinkedHologramName();
-					if (NamedHologramManager.getHologram(name) == null) {
-						fileStorage.deleteTouchHologram(name);
-						fileStorageUpdated = true;
-						ConsoleLogger.log(Level.WARNING, "Cannot find the hologram '" + name + "'. It was probably deleted from HolographicDisplays, commands have been removed too.");
-					}
+			for (TouchHologram touchHologram : touchManager.getTouchHolograms()) {
+				String name = touchHologram.getLinkedHologramName();
+				if (NamedHologramManager.getHologram(name) == null) {
+					fileStorage.deleteTouchHologram(name);
+					fileStorageUpdated = true;
+					ConsoleLogger.log(Level.WARNING, "Cannot find the hologram '" + name + "'. It was probably deleted from HolographicDisplays, commands have been removed too.");
 				}
-				
-				if (fileStorageUpdated) {
-					fileStorage.trySaveToDisk();
-				}
-				
-				// Update touch handlers
-				touchManager.refreshHolograms();
 			}
+			
+			if (fileStorageUpdated) {
+				fileStorage.trySaveToDisk();
+			}
+			
+			// Update touch handlers
+			touchManager.refreshHolograms();
 			
 		}, 20L);
 	}

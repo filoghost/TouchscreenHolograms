@@ -6,12 +6,12 @@
 	<groupId>com.gmail.filoghost.touchscreen</groupId>
 	<artifactId>touchscreen-holograms</artifactId>
 	<name>Touchscreen Holograms</name>
-	<version>1.4.1</version>
+	<version>1.4.2-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.test.skip>true</maven.test.skip>
 		<spigot-api.version>1.8-R0.1-SNAPSHOT</spigot-api.version>
 	</properties>
@@ -23,8 +23,8 @@
 		</repository>
 
 		<repository>
-			<id>filoghost-repo</id>
-			<url>https://ci.filoghost.me/plugin/repository/everything/</url>
+			<id>codemc-repo</id>
+			<url>https://repo.codemc.org/repository/maven-public/</url>
 		</repository>
 
 		<repository>
@@ -49,8 +49,8 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gmail.filoghost.updater</groupId>
-			<artifactId>updater</artifactId>
+			<groupId>me.filoghost.updatechecker</groupId>
+			<artifactId>updatechecker</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
@@ -97,7 +97,7 @@
 							<shadedPattern>com.gmail.filoghost.touchscreen.metrics</shadedPattern>
 						</relocation>
 						<relocation>
-							<pattern>com.gmail.filoghost.updater</pattern>
+							<pattern>me.filoghost.updatechecker</pattern>
 							<shadedPattern>com.gmail.filoghost.touchscreen.updater</shadedPattern>
 						</relocation>
 					</relocations>

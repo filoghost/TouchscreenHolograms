@@ -27,13 +27,13 @@ import com.gmail.filoghost.touchscreen.utils.ConsoleLogger;
 
 public class TouchHologram implements TouchHandler {
 	
-	private static Map<Player, Long> CLICK_COOLDOWNS = new HashMap<Player, Long>();
+	private static Map<Player, Long> CLICK_COOLDOWNS = new HashMap<>();
 
 	private final String linkedHologramName;
 	private final List<TouchCommand> commands;
 	
 	public TouchHologram(String linkedHologram) {
-		this(linkedHologram, new ArrayList<TouchCommand>());
+		this(linkedHologram, new ArrayList<>());
 	}
 	
 	public TouchHologram(String linkedHologram, List<TouchCommand> commands) {
