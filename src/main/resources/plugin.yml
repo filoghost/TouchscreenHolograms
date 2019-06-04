@@ -1,5 +1,5 @@
 name: TouchscreenHolograms
-main: com.gmail.filoghost.touchscreen.TouchscreenHolograms
+main: me.filoghost.touchscreenholograms.TouchscreenHolograms
 version: ${project.version}
 api-version: 1.13
 
