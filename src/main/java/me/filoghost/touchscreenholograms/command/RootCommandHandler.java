@@ -66,10 +66,10 @@ public class RootCommandHandler implements CommandExecutor {
 					CommandValidator.isTrue(args.length - 1 >= subCommand.getMinArguments(), "Usage: /" + label + " " + subCommand.getName() + " " + subCommand.getUsage());
 					
 					subCommand.execute(sender, Arrays.copyOfRange(args, 1, args.length));
-					return true;
 				} catch (CommandException e) {
 					sender.sendMessage(ChatColor.RED + e.getMessage());
 				}
+				return true;
 			}
 		}
 	
