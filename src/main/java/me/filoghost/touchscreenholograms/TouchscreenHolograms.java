@@ -118,7 +118,8 @@ public class TouchscreenHolograms extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new EventListener(), this);
 		
 		// bStats metrics
-		new MetricsLite(this);		
+		int pluginID = 3705;
+		new MetricsLite(this, pluginID);
 		
 		// The entities are loaded when the server is ready
 		Bukkit.getScheduler().runTaskLater(this, () -> {

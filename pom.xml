@@ -19,11 +19,11 @@
 	<distributionManagement>
 		<snapshotRepository>
 			<id>codemc-snapshots</id>
-			<url>https://repo.codemc.org/repository/maven-snapshots/</url>
+			<url>https://repo.codemc.io/repository/maven-snapshots/</url>
 		</snapshotRepository>
 		<repository>
 			<id>codemc-releases</id>
-			<url>https://repo.codemc.org/repository/maven-releases/</url>
+			<url>https://repo.codemc.io/repository/maven-releases/</url>
 		</repository>
 	</distributionManagement>
 
@@ -35,12 +35,7 @@
 
 		<repository>
 			<id>codemc-repo</id>
-			<url>https://repo.codemc.org/repository/maven-public/</url>
-		</repository>
-
-		<repository>
-			<id>bstats-repo</id>
-			<url>http://repo.bstats.org/content/repositories/releases/</url>
+			<url>https://repo.codemc.io/repository/maven-public/</url>
 		</repository>
 	</repositories>
 
@@ -55,7 +50,7 @@
 		<dependency>
 			<groupId>com.gmail.filoghost.holographicdisplays</groupId>
 			<artifactId>holographicdisplays-plugin</artifactId>
-			<version>2.3.0</version>
+			<version>2.4.2-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		
@@ -68,7 +63,7 @@
 		<dependency>
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-bukkit-lite</artifactId>
-			<version>1.2</version>
+			<version>1.7</version>
 		</dependency>
 	</dependencies>
 	
