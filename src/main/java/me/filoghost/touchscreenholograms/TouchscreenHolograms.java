@@ -71,24 +71,7 @@ public class TouchscreenHolograms extends JavaPlugin {
 			});
 		}
 		
-		// Check that Holographic Displays is present and enabled
-		Plugin holographicDisplaysPlugin = Bukkit.getPluginManager().getPlugin("HolographicDisplays");
-		try {
-			Class.forName("com.gmail.filoghost.holographicdisplays.HolographicDisplays");
-		} catch (Exception e) {
-			holographicDisplaysPlugin = null;
-		}
-		
-		if (holographicDisplaysPlugin == null || !holographicDisplaysPlugin.isEnabled()) {
-			printErrorAndDisable(
-				"******************************************************",
-				"     " + getDescription().getName() + " requires the plugin",
-				"     HolographicDisplays v2.0+ enabled to run.",
-				"     This plugin will be disabled.",
-				"******************************************************"
-			);
-			return;
-		}
+
 		
 		// Load the database
 		fileStorage = new TouchHologramStorage(new File(getDataFolder(), "database.yml"));
@@ -109,20 +92,41 @@ public class TouchscreenHolograms extends JavaPlugin {
 		touchManager = new TouchManager();
 		for (String touchHologramName : fileStorage.getTouchHolograms()) {
 			touchManager.add(fileStorage.loadTouchHologram(touchHologramName));
-		}		
-		
-		// Set the command handler
-		getCommand("touch").setExecutor(new RootCommandHandler());
-		
-		// Register events
-		Bukkit.getPluginManager().registerEvents(new EventListener(), this);
+		}
 		
 		// bStats metrics
 		int pluginID = 3705;
 		new MetricsLite(this, pluginID);
 		
-		// The entities are loaded when the server is ready
+		// Delay loading because:
+		// * "softdepend" in plugin.yml can break
+		// * Holographic Displays loads holograms in a delayed task
 		Bukkit.getScheduler().runTaskLater(this, () -> {
+
+			// Check that Holographic Displays is present and enabled
+			Plugin holographicDisplaysPlugin = Bukkit.getPluginManager().getPlugin("HolographicDisplays");
+			try {
+				Class.forName("com.gmail.filoghost.holographicdisplays.HolographicDisplays");
+			} catch (Exception e) {
+				holographicDisplaysPlugin = null;
+			}
+
+			if (holographicDisplaysPlugin == null || !holographicDisplaysPlugin.isEnabled()) {
+				printErrorAndDisable(
+						"******************************************************",
+						"     " + getDescription().getName() + " requires the plugin",
+						"     HolographicDisplays v2.0+ enabled to run.",
+						"     This plugin will be disabled.",
+						"******************************************************"
+				);
+				return;
+			}
+
+			// Set the command handler
+			getCommand("touch").setExecutor(new RootCommandHandler());
+
+			// Register events
+			Bukkit.getPluginManager().registerEvents(new EventListener(), this);
 
 			// Check that holograms still exist in Holographic Displays
 			boolean fileStorageUpdated = false;
