@@ -14,14 +14,13 @@
  */
 package me.filoghost.touchscreenholograms.command.sub;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-
 import me.filoghost.touchscreenholograms.Perms;
 import me.filoghost.touchscreenholograms.command.CommandException;
 import me.filoghost.touchscreenholograms.command.RootCommandHandler;
 import me.filoghost.touchscreenholograms.command.SubCommand;
 import me.filoghost.touchscreenholograms.utils.Format;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 public class HelpCommand extends SubCommand {
 

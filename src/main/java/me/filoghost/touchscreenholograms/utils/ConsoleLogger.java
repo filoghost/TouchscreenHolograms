@@ -14,9 +14,9 @@
  */
 package me.filoghost.touchscreenholograms.utils;
 
-import java.util.logging.Level;
-
 import me.filoghost.touchscreenholograms.TouchscreenHolograms;
+
+import java.util.logging.Level;
 
 public class ConsoleLogger {
 

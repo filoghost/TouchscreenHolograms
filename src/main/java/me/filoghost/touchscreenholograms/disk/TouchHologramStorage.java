@@ -14,13 +14,13 @@
  */
 package me.filoghost.touchscreenholograms.disk;
 
+import me.filoghost.touchscreenholograms.touch.TouchCommand;
+import me.filoghost.touchscreenholograms.touch.TouchHologram;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import me.filoghost.touchscreenholograms.touch.TouchCommand;
-import me.filoghost.touchscreenholograms.touch.TouchHologram;
 
 public class TouchHologramStorage extends ConfigBase {
 

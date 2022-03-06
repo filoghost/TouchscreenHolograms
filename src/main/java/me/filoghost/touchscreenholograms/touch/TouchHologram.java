@@ -14,15 +14,14 @@
  */
 package me.filoghost.touchscreenholograms.touch;
 
+import me.filoghost.touchscreenholograms.utils.ConsoleLogger;
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
-
-import org.bukkit.entity.Player;
-
-import me.filoghost.touchscreenholograms.utils.ConsoleLogger;
 
 public class TouchHologram {
 

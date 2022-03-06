@@ -14,11 +14,6 @@
  */
 package me.filoghost.touchscreenholograms.command.sub;
 
-import java.util.List;
-
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-
 import me.filoghost.touchscreenholograms.Perms;
 import me.filoghost.touchscreenholograms.TouchscreenHolograms;
 import me.filoghost.touchscreenholograms.command.CommandException;
@@ -27,6 +22,10 @@ import me.filoghost.touchscreenholograms.command.SubCommand;
 import me.filoghost.touchscreenholograms.touch.TouchHologram;
 import me.filoghost.touchscreenholograms.touch.TouchManager;
 import me.filoghost.touchscreenholograms.utils.Format;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+
+import java.util.List;
 
 public class ListCommand extends SubCommand {
 

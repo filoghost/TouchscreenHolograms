@@ -14,16 +14,6 @@
  */
 package me.filoghost.touchscreenholograms.command;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-
 import me.filoghost.touchscreenholograms.TouchscreenHolograms;
 import me.filoghost.touchscreenholograms.command.sub.AddCommand;
 import me.filoghost.touchscreenholograms.command.sub.ClearAllCommand;
@@ -31,6 +21,15 @@ import me.filoghost.touchscreenholograms.command.sub.DetailsCommand;
 import me.filoghost.touchscreenholograms.command.sub.HelpCommand;
 import me.filoghost.touchscreenholograms.command.sub.ListCommand;
 import me.filoghost.touchscreenholograms.command.sub.RemoveCommand;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class RootCommandHandler implements CommandExecutor {
 

@@ -14,15 +14,14 @@
  */
 package me.filoghost.touchscreenholograms.disk;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-
+import me.filoghost.touchscreenholograms.utils.ConsoleLogger;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import me.filoghost.touchscreenholograms.utils.ConsoleLogger;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
 
 public class ConfigBase {
 

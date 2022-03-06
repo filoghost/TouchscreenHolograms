@@ -14,14 +14,14 @@
  */
 package me.filoghost.touchscreenholograms.bridge;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import me.filoghost.touchscreenholograms.TouchscreenHolograms;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import me.filoghost.touchscreenholograms.TouchscreenHolograms;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class BungeeConnector {
 

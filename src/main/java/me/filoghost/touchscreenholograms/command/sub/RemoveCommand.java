@@ -14,9 +14,6 @@
  */
 package me.filoghost.touchscreenholograms.command.sub;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-
 import me.filoghost.touchscreenholograms.Perms;
 import me.filoghost.touchscreenholograms.TouchscreenHolograms;
 import me.filoghost.touchscreenholograms.command.CommandException;
@@ -26,6 +23,8 @@ import me.filoghost.touchscreenholograms.disk.TouchHologramStorage;
 import me.filoghost.touchscreenholograms.touch.TouchCommand;
 import me.filoghost.touchscreenholograms.touch.TouchHologram;
 import me.filoghost.touchscreenholograms.touch.TouchManager;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 public class RemoveCommand extends SubCommand {
 

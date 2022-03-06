@@ -14,15 +14,14 @@
  */
 package me.filoghost.touchscreenholograms.listener;
 
+import me.filoghost.touchscreenholograms.Perms;
+import me.filoghost.touchscreenholograms.TouchscreenHolograms;
+import me.filoghost.touchscreenholograms.touch.TouchHologram;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
-import me.filoghost.touchscreenholograms.Perms;
-import me.filoghost.touchscreenholograms.TouchscreenHolograms;
-import me.filoghost.touchscreenholograms.touch.TouchHologram;
 
 public class EventListener implements Listener {
 

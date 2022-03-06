@@ -14,15 +14,7 @@
  */
 package me.filoghost.touchscreenholograms;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-
 import me.filoghost.touchscreenholograms.bridge.HolographicDisplaysHelper;
-import org.bstats.bukkit.MetricsLite;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import me.filoghost.touchscreenholograms.command.RootCommandHandler;
 import me.filoghost.touchscreenholograms.disk.Settings;
 import me.filoghost.touchscreenholograms.disk.TouchHologramStorage;
@@ -31,6 +23,13 @@ import me.filoghost.touchscreenholograms.touch.TouchHologram;
 import me.filoghost.touchscreenholograms.touch.TouchManager;
 import me.filoghost.touchscreenholograms.utils.ConsoleLogger;
 import me.filoghost.updatechecker.UpdateChecker;
+import org.bstats.bukkit.MetricsLite;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
 
 public class TouchscreenHolograms extends JavaPlugin {
 

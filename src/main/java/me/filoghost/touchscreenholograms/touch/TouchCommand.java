@@ -14,11 +14,10 @@
  */
 package me.filoghost.touchscreenholograms.touch;
 
+import me.filoghost.touchscreenholograms.bridge.BungeeConnector;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
-import me.filoghost.touchscreenholograms.bridge.BungeeConnector;
 
 public class TouchCommand {
 

@@ -14,9 +14,6 @@
  */
 package me.filoghost.touchscreenholograms.command.sub;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-
 import me.filoghost.touchscreenholograms.Perms;
 import me.filoghost.touchscreenholograms.TouchscreenHolograms;
 import me.filoghost.touchscreenholograms.command.CommandException;
@@ -24,6 +21,8 @@ import me.filoghost.touchscreenholograms.command.CommandValidator;
 import me.filoghost.touchscreenholograms.command.SubCommand;
 import me.filoghost.touchscreenholograms.touch.TouchHologram;
 import me.filoghost.touchscreenholograms.touch.TouchManager;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 public class DetailsCommand extends SubCommand {
 
