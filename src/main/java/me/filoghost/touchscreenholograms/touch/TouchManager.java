@@ -14,15 +14,12 @@
  */
 package me.filoghost.touchscreenholograms.touch;
 
+import me.filoghost.touchscreenholograms.bridge.HolographicDisplaysHelper;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.gmail.filoghost.holographicdisplays.api.line.TouchableLine;
-import com.gmail.filoghost.holographicdisplays.object.NamedHologram;
-import com.gmail.filoghost.holographicdisplays.object.NamedHologramManager;
-import com.gmail.filoghost.holographicdisplays.object.line.CraftHologramLine;
 
 public class TouchManager {
 
@@ -47,29 +44,11 @@ public class TouchManager {
 
     public void refreshHolograms() {
         // Remove all the touch handlers that belong to this plugin
-        for (NamedHologram hologram : NamedHologramManager.getHolograms()) {
-
-            for (int i = 0; i < hologram.size(); i++) {
-                CraftHologramLine line = hologram.getLine(i);
-
-                if (line instanceof TouchableLine) {
-                    TouchableLine touchable = (TouchableLine) line;
-
-                    if (touchable.getTouchHandler() != null && touchable.getTouchHandler() instanceof TouchHologram) {
-                        touchable.setTouchHandler(null);
-                    }
-                }
-            }
-        }
+        HolographicDisplaysHelper.removeTouchHandlerFromHolograms();
 
         // Add the touch handlers back
         for (TouchHologram touch : touchHologramsByName.values()) {
-            NamedHologram hologram = NamedHologramManager.getHologram(touch.getLinkedHologramName());
-
-            if (hologram != null && hologram.size() > 0) {
-                // Unsafe cast because all lines are touchable (for now)
-                ((TouchableLine) hologram.getLine(0)).setTouchHandler(touch);
-            }
+            HolographicDisplaysHelper.setTouchHandler(touch.getLinkedHologramName(), touch);
         }
     }
 }

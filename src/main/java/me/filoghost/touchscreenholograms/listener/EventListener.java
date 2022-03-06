@@ -20,9 +20,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import com.gmail.filoghost.holographicdisplays.event.HolographicDisplaysReloadEvent;
-import com.gmail.filoghost.holographicdisplays.event.NamedHologramEditedEvent;
-
 import me.filoghost.touchscreenholograms.Perms;
 import me.filoghost.touchscreenholograms.TouchscreenHolograms;
 import me.filoghost.touchscreenholograms.touch.TouchHologram;
@@ -41,16 +38,5 @@ public class EventListener implements Listener {
     public void onLeave(PlayerQuitEvent event) {
         TouchHologram.removeCooldown(event.getPlayer());
     }
-
-    @EventHandler
-    public void onHologramEdit(NamedHologramEditedEvent event) {
-        TouchscreenHolograms.getTouchManager().refreshHolograms();
-    }
-
-    @EventHandler
-    public void onHolographicDisplaysReload(HolographicDisplaysReloadEvent event) {
-        TouchscreenHolograms.getTouchManager().refreshHolograms();
-    }
-
 
 }

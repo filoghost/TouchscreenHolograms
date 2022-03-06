@@ -14,13 +14,11 @@
  */
 package me.filoghost.touchscreenholograms.command.sub;
 
+import me.filoghost.touchscreenholograms.bridge.HolographicDisplaysHelper;
+import me.filoghost.touchscreenholograms.bridge.WrappedHologram;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-
-import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
-import com.gmail.filoghost.holographicdisplays.object.NamedHologram;
-import com.gmail.filoghost.holographicdisplays.object.NamedHologramManager;
 
 import me.filoghost.touchscreenholograms.Perms;
 import me.filoghost.touchscreenholograms.TouchscreenHolograms;
@@ -52,7 +50,7 @@ public class AddCommand extends SubCommand {
         TouchHologram touch = touchManager.getByName(args[0]);
 
         if (touch == null) {
-            NamedHologram hologram = NamedHologramManager.getHologram(args[0]);
+            WrappedHologram hologram = HolographicDisplaysHelper.getHologram(args[0]);
             CommandValidator.notNull(hologram, "There's no hologram with that name. The name is case sensitive.");
 
             touch = new TouchHologram(hologram.getName());
@@ -67,12 +65,8 @@ public class AddCommand extends SubCommand {
                 }
 
                 // If the text is too big for the touch hitbox, send a warning message
-                if (hologram.getLine(0) instanceof TextLine) {
-                    String text = ChatColor.stripColor(((TextLine) hologram.getLine(0)).getText());
-
-                    if (text.length() > 6) {
-                        Format.sendWarning(sender, "You selected a hologram with the first line longer than 6 chars. Since the holograms rotate (client side), you should reduce the length, because the click wouldn't be detected correctly.");
-                    }
+                if (hologram.isFirstLineTextLongerThan(6)) {
+                    Format.sendWarning(sender, "You selected a hologram with the first line longer than 6 chars. Since the holograms rotate (client side), you should reduce the length, because the click wouldn't be detected correctly.");
                 }
             }
         }

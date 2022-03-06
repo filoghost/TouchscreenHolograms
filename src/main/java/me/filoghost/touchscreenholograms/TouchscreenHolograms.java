@@ -18,12 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 
+import me.filoghost.touchscreenholograms.bridge.HolographicDisplaysHelper;
 import org.bstats.bukkit.MetricsLite;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.gmail.filoghost.holographicdisplays.object.NamedHologramManager;
 
 import me.filoghost.touchscreenholograms.command.RootCommandHandler;
 import me.filoghost.touchscreenholograms.disk.Settings;
@@ -102,16 +100,8 @@ public class TouchscreenHolograms extends JavaPlugin {
         // * "softdepend" in plugin.yml can break
         // * Holographic Displays loads holograms in a delayed task
         Bukkit.getScheduler().runTaskLater(this, () -> {
-
             // Check that Holographic Displays is present and enabled
-            Plugin holographicDisplaysPlugin = Bukkit.getPluginManager().getPlugin("HolographicDisplays");
-            try {
-                Class.forName("com.gmail.filoghost.holographicdisplays.HolographicDisplays");
-            } catch (Exception e) {
-                holographicDisplaysPlugin = null;
-            }
-
-            if (holographicDisplaysPlugin == null || !holographicDisplaysPlugin.isEnabled()) {
+            if (!HolographicDisplaysHelper.isPluginEnabled()) {
                 printErrorAndDisable(
                         "******************************************************",
                         "     " + getDescription().getName() + " requires the plugin",
@@ -127,13 +117,14 @@ public class TouchscreenHolograms extends JavaPlugin {
 
             // Register events
             Bukkit.getPluginManager().registerEvents(new EventListener(), this);
+            HolographicDisplaysHelper.registerChangeListener(touchManager::refreshHolograms, this);
 
             // Check that holograms still exist in Holographic Displays
             boolean fileStorageUpdated = false;
 
             for (TouchHologram touchHologram : touchManager.getTouchHolograms()) {
                 String name = touchHologram.getLinkedHologramName();
-                if (NamedHologramManager.getHologram(name) == null) {
+                if (!HolographicDisplaysHelper.hologramExists(name)) {
                     fileStorage.deleteTouchHologram(name);
                     fileStorageUpdated = true;
                     ConsoleLogger.log(Level.WARNING, "Cannot find the hologram '" + name + "'. It was probably deleted from HolographicDisplays, commands have been removed too.");

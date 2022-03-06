@@ -22,11 +22,9 @@ import java.util.logging.Level;
 
 import org.bukkit.entity.Player;
 
-import com.gmail.filoghost.holographicdisplays.api.handler.TouchHandler;
-
 import me.filoghost.touchscreenholograms.utils.ConsoleLogger;
 
-public class TouchHologram implements TouchHandler {
+public class TouchHologram {
 
     private static Map<Player, Long> CLICK_COOLDOWNS = new HashMap<>();
 
@@ -42,7 +40,6 @@ public class TouchHologram implements TouchHandler {
         this.commands = commands;
     }
 
-    @Override
     public void onTouch(Player whoClicked) {
         // Avoid command spam
         Long oldCooldown = CLICK_COOLDOWNS.get(whoClicked);
