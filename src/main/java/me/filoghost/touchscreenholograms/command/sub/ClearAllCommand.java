@@ -26,7 +26,6 @@ public class ClearAllCommand extends SubCommand {
         setDescription("Clears all the commands from a hologram.");
     }
 
-
     @Override
     public void execute(CommandSender sender, String[] args) throws CommandException {
         TouchManager touchManager = TouchscreenHolograms.getTouchManager();

@@ -13,9 +13,9 @@ public enum TouchCommandType {
     TELL("tell:"),
     SERVER("server:");
 
-    private String prefix;
+    private final String prefix;
 
-    private TouchCommandType(String prefix) {
+    TouchCommandType(String prefix) {
         this.prefix = prefix;
     }
 

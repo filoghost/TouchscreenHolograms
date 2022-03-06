@@ -16,7 +16,7 @@ import java.util.logging.Level;
 
 public class TouchHologram {
 
-    private static Map<Player, Long> CLICK_COOLDOWNS = new HashMap<>();
+    private static final Map<Player, Long> CLICK_COOLDOWNS = new HashMap<>();
 
     private final String linkedHologramName;
     private final List<TouchCommand> commands;

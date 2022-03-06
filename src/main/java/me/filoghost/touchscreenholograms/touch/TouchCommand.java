@@ -12,8 +12,8 @@ import org.bukkit.entity.Player;
 
 public class TouchCommand {
 
-    private String command;
-    private TouchCommandType type;
+    private final String command;
+    private final TouchCommandType type;
 
     private TouchCommand(String command, TouchCommandType type) {
         this.command = command;
@@ -50,7 +50,6 @@ public class TouchCommand {
         return new TouchCommand(commandString, type);
     }
 
-
     public void execute(Player player) throws Exception {
         if (command == null || command.length() == 0) {
             return;
@@ -61,7 +60,6 @@ public class TouchCommand {
                                      .replace("{world}", player.getWorld().getName())
                                      .replace("{online}", Integer.toString(Bukkit.getOnlinePlayers().size()))
                                      .replace("{max_players}", Integer.toString(Bukkit.getMaxPlayers()));
-
 
         if (type == TouchCommandType.CONSOLE) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), localCommand);
@@ -88,11 +86,6 @@ public class TouchCommand {
         } else {
             throw new IllegalStateException("Unhandled command type: " + type);
         }
-    }
-
-
-    public TouchCommandType getType() {
-        return type;
     }
 
 }

@@ -31,7 +31,6 @@ public class AddCommand extends SubCommand {
         setDescription("Adds a command to a hologram.");
     }
 
-
     @Override
     public void execute(CommandSender sender, String[] args) throws CommandException {
         TouchManager touchManager = TouchscreenHolograms.getTouchManager();

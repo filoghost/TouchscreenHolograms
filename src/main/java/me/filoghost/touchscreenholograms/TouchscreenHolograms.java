@@ -59,8 +59,6 @@ public class TouchscreenHolograms extends JavaPlugin {
             });
         }
 
-
-
         // Load the database
         fileStorage = new TouchHologramStorage(new File(getDataFolder(), "database.yml"));
         try {
@@ -131,21 +129,19 @@ public class TouchscreenHolograms extends JavaPlugin {
         }, 20L);
     }
 
-
-    private static void printErrorAndDisable(String... messages) {
-        StringBuffer buffer = new StringBuffer("\n ");
-        for (String message : messages) {
-            buffer.append('\n');
-            buffer.append(message);
+    private static void printErrorAndDisable(String... messageLines) {
+        StringBuilder message = new StringBuilder("\n ");
+        for (String messageLine : messageLines) {
+            message.append('\n');
+            message.append(messageLine);
         }
-        buffer.append('\n');
-        System.out.println(buffer.toString());
+        message.append('\n');
+        System.out.println(message);
         try {
             Thread.sleep(5000);
-        } catch (InterruptedException ex) { }
+        } catch (InterruptedException ignored) {}
         instance.setEnabled(false);
     }
-
 
     public static TouchscreenHolograms getInstance() {
         return instance;

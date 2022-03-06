@@ -25,7 +25,6 @@ public class DetailsCommand extends SubCommand {
         setDescription("Lists all the commands in a hologram.");
     }
 
-
     @Override
     public void execute(CommandSender sender, String[] args) throws CommandException {
         TouchManager touchManager = TouchscreenHolograms.getTouchManager();
@@ -38,7 +37,6 @@ public class DetailsCommand extends SubCommand {
         for (int i = 0; i < hologram.getCommands().size(); i++) {
             sender.sendMessage(ChatColor.GREEN + "" + (i+1) + ") " + ChatColor.GRAY + hologram.getCommands().get(i).toCommandString());
         }
-
     }
 
 }

@@ -52,8 +52,4 @@ public class TouchHologramStorage extends ConfigBase {
         return config.getKeys(false);
     }
 
-    public boolean isExistingTouchHologram(String name) {
-        return config.isConfigurationSection(name);
-    }
-
 }

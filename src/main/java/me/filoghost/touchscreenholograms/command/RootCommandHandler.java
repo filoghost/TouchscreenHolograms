@@ -17,26 +17,23 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class RootCommandHandler implements CommandExecutor {
 
-    private List<SubCommand> subCommands;
+    private final List<SubCommand> subCommands;
 
     public RootCommandHandler() {
-        subCommands = new ArrayList<>();
-
-        addSubCommand(new ClearAllCommand());
-        addSubCommand(new ListCommand());
-        addSubCommand(new AddCommand());
-        addSubCommand(new RemoveCommand());
-        addSubCommand(new DetailsCommand());
-        addSubCommand(new HelpCommand(this));
+        subCommands = Arrays.asList(
+                new ClearAllCommand(),
+                new ListCommand(),
+                new AddCommand(),
+                new RemoveCommand(),
+                new DetailsCommand(),
+                new HelpCommand(this)
+        );
     }
-
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -67,7 +64,6 @@ public class RootCommandHandler implements CommandExecutor {
         return true;
     }
 
-
     private boolean isValidTrigger(SubCommand subCommand, String name) {
         if (subCommand.getName().equalsIgnoreCase(name)) {
             return true;
@@ -84,14 +80,8 @@ public class RootCommandHandler implements CommandExecutor {
         return false;
     }
 
-
-    public void addSubCommand(SubCommand subCommand) {
-        subCommands.add(subCommand);
-    }
-
-
     public List<SubCommand> getSubCommands() {
-        return Collections.unmodifiableList(subCommands);
+        return subCommands;
     }
 
 }

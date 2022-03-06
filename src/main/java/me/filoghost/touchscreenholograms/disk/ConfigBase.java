@@ -16,7 +16,7 @@ import java.util.logging.Level;
 
 public class ConfigBase {
 
-    protected File file;
+    private final File file;
     protected FileConfiguration config;
 
     public ConfigBase(File file) {
@@ -39,20 +39,18 @@ public class ConfigBase {
         }
     }
 
-    public boolean trySaveToDisk() {
-        return trySaveToDisk(null);
+    public void trySaveToDisk() {
+        trySaveToDisk(null);
     }
 
-    public boolean trySaveToDisk(CommandSender sender) {
+    public void trySaveToDisk(CommandSender sender) {
         try {
             saveToDisk();
-            return true;
         } catch (IOException ex) {
             ConsoleLogger.log(Level.SEVERE, "Unable to save " + file.getName() + " to disk!", ex);
             if (sender != null) {
                 sender.sendMessage("I/O error: could not save " + file.getName() + " to disk.");
             }
-            return false;
         }
     }
 

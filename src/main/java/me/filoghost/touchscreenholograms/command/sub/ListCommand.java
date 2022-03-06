@@ -30,7 +30,6 @@ public class ListCommand extends SubCommand {
         setDescription("Lists all the touch holograms.");
     }
 
-
     @Override
     public void execute(CommandSender sender, String[] args) throws CommandException {
         TouchManager touchManager = TouchscreenHolograms.getTouchManager();

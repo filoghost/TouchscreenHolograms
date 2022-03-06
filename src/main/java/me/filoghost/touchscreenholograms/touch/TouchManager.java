@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class TouchManager {
 
-    private Map<String, TouchHologram> touchHologramsByName = new LinkedHashMap<>();
+    private final Map<String, TouchHologram> touchHologramsByName = new LinkedHashMap<>();
 
     public void add(TouchHologram touchHologram) {
         touchHologramsByName.put(touchHologram.getLinkedHologramName().toLowerCase(), touchHologram);
@@ -32,7 +32,6 @@ public class TouchManager {
         return new ArrayList<>(touchHologramsByName.values());
     }
 
-
     public void refreshHolograms() {
         // Remove all the touch handlers that belong to this plugin
         HolographicDisplaysHelper.removeTouchHandlerFromHolograms();
@@ -42,4 +41,5 @@ public class TouchManager {
             HolographicDisplaysHelper.setTouchHandler(touch.getLinkedHologramName(), touch);
         }
     }
+
 }

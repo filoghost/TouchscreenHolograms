@@ -27,7 +27,6 @@ public class RemoveCommand extends SubCommand {
         setDescription("Removes a command at a given index.");
     }
 
-
     @Override
     public void execute(CommandSender sender, String[] args) throws CommandException {
         TouchManager touchManager = TouchscreenHolograms.getTouchManager();

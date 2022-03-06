@@ -10,10 +10,9 @@ import java.io.IOException;
 
 public class Settings extends ConfigBase {
 
-    private static String NODE_UPDATE_NOTIFICATION = "update-notification";
+    private static final String NODE_UPDATE_NOTIFICATION = "update-notification";
 
     public boolean updateNotification = true;
-
 
     public Settings(File file) {
         super(file);

@@ -15,7 +15,7 @@ import org.bukkit.command.CommandSender;
 
 public class HelpCommand extends SubCommand {
 
-    private RootCommandHandler commandHandler;
+    private final RootCommandHandler commandHandler;
 
     public HelpCommand(RootCommandHandler commandHandler) {
         super("help");
@@ -26,7 +26,6 @@ public class HelpCommand extends SubCommand {
         setDescription("Lists all the possible commands.");
 
     }
-
 
     @Override
     public void execute(CommandSender sender, String[] args) throws CommandException {
