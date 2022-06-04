@@ -5,19 +5,20 @@
  */
 package me.filoghost.touchscreenholograms.bridge;
 
-import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
-import com.gmail.filoghost.holographicdisplays.object.NamedHologram;
+import me.filoghost.holographicdisplays.api.hologram.HologramLines;
+import me.filoghost.holographicdisplays.api.hologram.line.TextHologramLine;
+import me.filoghost.holographicdisplays.plugin.internal.hologram.InternalHologram;
 import org.bukkit.ChatColor;
 
 public class WrappedHologram {
 
-    private final NamedHologram hologram;
+    private final InternalHologram hologram;
 
-    private WrappedHologram(NamedHologram hologram) {
+    private WrappedHologram(InternalHologram hologram) {
         this.hologram = hologram;
     }
 
-    public static WrappedHologram wrap(NamedHologram hologram) {
+    public static WrappedHologram wrap(InternalHologram hologram) {
         if (hologram == null) {
             return null;
         }
@@ -30,13 +31,15 @@ public class WrappedHologram {
     }
 
     public int size() {
-        return hologram.size();
+        return hologram.getRenderedHologram().getLines().size();
     }
 
     public boolean isFirstLineTextLongerThan(int length) {
-        if (size() > 0 && hologram.getLine(0) instanceof TextLine) {
-            String firstLineText = ChatColor.stripColor(((TextLine) hologram.getLine(0)).getText());
-            return firstLineText.length() > length;
+        HologramLines lines = hologram.getRenderedHologram().getLines();
+
+        if (lines.size() > 0 && lines.get(0) instanceof TextHologramLine) {
+            String firstLineText = ChatColor.stripColor(((TextHologramLine) lines.get(0)).getText());
+            return firstLineText != null && firstLineText.length() > length;
         } else {
             return false;
         }

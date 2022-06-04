@@ -5,12 +5,15 @@
  */
 package me.filoghost.touchscreenholograms.bridge;
 
-import com.gmail.filoghost.holographicdisplays.api.line.TouchableLine;
-import com.gmail.filoghost.holographicdisplays.event.HolographicDisplaysReloadEvent;
-import com.gmail.filoghost.holographicdisplays.event.NamedHologramEditedEvent;
-import com.gmail.filoghost.holographicdisplays.object.NamedHologram;
-import com.gmail.filoghost.holographicdisplays.object.NamedHologramManager;
-import com.gmail.filoghost.holographicdisplays.object.line.CraftHologramLine;
+import me.filoghost.holographicdisplays.api.hologram.HologramLines;
+import me.filoghost.holographicdisplays.api.hologram.line.ClickableHologramLine;
+import me.filoghost.holographicdisplays.api.hologram.line.HologramLineClickEvent;
+import me.filoghost.holographicdisplays.api.hologram.line.HologramLineClickListener;
+import me.filoghost.holographicdisplays.plugin.HolographicDisplays;
+import me.filoghost.holographicdisplays.plugin.event.HolographicDisplaysReloadEvent;
+import me.filoghost.holographicdisplays.plugin.event.InternalHologramChangeEvent;
+import me.filoghost.holographicdisplays.plugin.internal.hologram.InternalHologram;
+import me.filoghost.holographicdisplays.plugin.internal.hologram.InternalHologramManager;
 import me.filoghost.touchscreenholograms.touch.TouchHologram;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -19,22 +22,29 @@ import org.bukkit.plugin.Plugin;
 
 public class HolographicDisplaysHelper {
 
-    public static boolean isPluginEnabled() {
+    private static InternalHologramManager hologramManager;
+
+    public static boolean init() {
         try {
-            Class.forName("com.gmail.filoghost.holographicdisplays.HolographicDisplays");
+            Class.forName("me.filoghost.holographicdisplays.api.HolographicDisplaysAPI");
         } catch (Exception e) {
             return false;
         }
 
         Plugin plugin = Bukkit.getPluginManager().getPlugin("HolographicDisplays");
-        return plugin != null && plugin.isEnabled();
+        if (plugin == null || !plugin.isEnabled()) {
+            return false;
+        }
+
+        hologramManager = HolographicDisplays.getInstance().getInternalHologramManager();
+        return true;
     }
 
     public static void registerChangeListener(Runnable listener, Plugin plugin) {
         Bukkit.getPluginManager().registerEvents(new Listener() {
 
             @EventHandler
-            public void onHologramEdit(NamedHologramEditedEvent event) {
+            public void onHologramEdit(InternalHologramChangeEvent event) {
                 listener.run();
             }
 
@@ -47,37 +57,55 @@ public class HolographicDisplaysHelper {
     }
 
     public static boolean hologramExists(String hologramName) {
-        return getHologram(hologramName) != null;
+        return hologramManager.getHologramByName(hologramName) != null;
     }
 
     public static WrappedHologram getHologram(String hologramName) {
-        return WrappedHologram.wrap(NamedHologramManager.getHologram(hologramName));
+        return WrappedHologram.wrap(hologramManager.getHologramByName(hologramName));
     }
 
     public static void removeTouchHandlerFromHolograms() {
-        for (NamedHologram hologram : NamedHologramManager.getHolograms()) {
+        for (InternalHologram hologram : hologramManager.getHolograms()) {
+            HologramLines lines = hologram.getRenderedHologram().getLines();
 
-            for (int i = 0; i < hologram.size(); i++) {
-                CraftHologramLine line = hologram.getLine(i);
-
-                if (line instanceof TouchableLine) {
-                    TouchableLine touchable = (TouchableLine) line;
-
-                    if (touchable.getTouchHandler() != null && touchable.getTouchHandler() instanceof TouchHologram) {
-                        touchable.setTouchHandler(null);
-                    }
+            for (int i = 0; i < lines.size(); i++) {
+                // Unsafe cast: all lines are touchable
+                ClickableHologramLine line = (ClickableHologramLine) lines.get(i);
+                if (line.getClickListener() instanceof TouchListenerAdapter) {
+                    line.setClickListener(null);
                 }
             }
         }
     }
 
     public static void setTouchHandler(String hologramName, TouchHologram touchHologram) {
-        NamedHologram hologram = NamedHologramManager.getHologram(hologramName);
+        InternalHologram hologram = hologramManager.getHologramByName(hologramName);
 
-        if (hologram != null && hologram.size() > 0) {
-            // Unsafe cast because all lines are touchable (for now)
-            ((TouchableLine) hologram.getLine(0)).setTouchHandler(touchHologram::onTouch);
+        if (hologram != null) {
+            HologramLines lines = hologram.getRenderedHologram().getLines();
+
+            if (lines.size() > 0) {
+                // Unsafe cast: all lines are touchable
+                System.out.println("Setting listener on " + hologram.getName());
+                ((ClickableHologramLine) lines.get(0)).setClickListener(new TouchListenerAdapter(touchHologram));
+            }
         }
+    }
+
+
+    private static class TouchListenerAdapter implements HologramLineClickListener {
+
+        private final TouchHologram touchHologram;
+
+        TouchListenerAdapter(TouchHologram touchHologram) {
+            this.touchHologram = touchHologram;
+        }
+
+        @Override
+        public void onClick(HologramLineClickEvent event) {
+            touchHologram.onTouch(event.getPlayer());
+        }
+
     }
 
 }

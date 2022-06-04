@@ -89,11 +89,11 @@ public class TouchscreenHolograms extends JavaPlugin {
         // * Holographic Displays loads holograms in a delayed task
         Bukkit.getScheduler().runTaskLater(this, () -> {
             // Check that Holographic Displays is present and enabled
-            if (!HolographicDisplaysHelper.isPluginEnabled()) {
+            if (!HolographicDisplaysHelper.init()) {
                 printErrorAndDisable(
                         "******************************************************",
                         "     " + getDescription().getName() + " requires the plugin",
-                        "     HolographicDisplays v2.0+ enabled to run.",
+                        "     HolographicDisplays v3.0+ enabled to run.",
                         "     This plugin will be disabled.",
                         "******************************************************"
                 );
@@ -129,7 +129,7 @@ public class TouchscreenHolograms extends JavaPlugin {
         }, 20L);
     }
 
-    private static void printErrorAndDisable(String... messageLines) {
+    private void printErrorAndDisable(String... messageLines) {
         StringBuilder message = new StringBuilder("\n ");
         for (String messageLine : messageLines) {
             message.append('\n');
@@ -140,7 +140,7 @@ public class TouchscreenHolograms extends JavaPlugin {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ignored) {}
-        instance.setEnabled(false);
+        setEnabled(false);
     }
 
     public static TouchscreenHolograms getInstance() {

@@ -50,7 +50,7 @@ public class AddCommand extends SubCommand {
                 Format.sendWarning(sender, "The hologram has no lines!");
             } else {
                 if (hologram.size() > 1) {
-                    Format.sendWarning(sender, "You selected a hologram that contains more than one line: it's recommanded to use holograms with a single line, because the click wouldn't be detected correctly in the other lines.");
+                    Format.sendWarning(sender, "You selected a hologram that contains more than one line: it's recommended to use holograms with a single line, because the click wouldn't be detected correctly in the other lines.");
                 }
 
                 // If the text is too big for the touch hitbox, send a warning message
